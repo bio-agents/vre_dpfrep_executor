@@ -1,0 +1,84 @@
+{
+    "_id": "DpFrEP",
+    "input_files": [
+        {
+            "name": "expression_matrix",
+            "description": "Gene expression matrix with normalized counts for each gene (rows) in each condition (columns)",
+            "help": "Comma-delimited file containing the gene expression matrix",
+            "file_type": [
+                "CSV"
+            ],
+            "data_type": [
+                "expression_profile"
+            ],
+            "required": true,
+            "allow_multiple": false
+        }
+    ],
+    "input_files_public_dir": [],
+    "input_files_combinations": [
+        {
+            "description": "Run DpFrEP pipeline",
+            "input_files": [
+                "expression_matrix"
+            ]
+        }
+    ],
+    "arguments": [
+        {
+            "name": "tumor_type",
+            "description": "Tumor type",
+            "help": "SOLID or LIQUID",
+            "type": "enum",
+            "enum_items": {
+                "description": [
+                    "SOLID",
+                    "LIQUID"
+                ],
+                "name": [
+                    "SOLID",
+                    "LIQUID"
+                ]
+            },
+            "default": [
+                "SOLID"
+            ]
+        },
+        {
+            "name": "model",
+            "description": "Model used to predict drug efficacy",
+            "help": "Ensemble refers to both Broad and Sanger models",
+            "type": "enum",
+            "enum_items": {
+                "description": [
+                    "Broad",
+                    "Sanger",
+                    "Ensemble"
+                ],
+                "name": [
+                    "Broad",
+                    "Sanger",
+                    "Ensemble"
+                ]
+            },
+            "default": [
+                "Broad"
+            ]
+        }
+    ],
+    "output_files": [
+        {
+            "name": "predicted_drugs",
+            "required": true,
+            "allow_multiple": false,
+            "file": {
+                "file_type": "XLSX",
+                "data_type": "predicted_drugs",
+                "meta_data": {
+                    "visible": true,
+                    "description": "For each condition, a list of predicted drugs from the most to the least effective"
+                }
+            }
+        }
+    ]
+}
